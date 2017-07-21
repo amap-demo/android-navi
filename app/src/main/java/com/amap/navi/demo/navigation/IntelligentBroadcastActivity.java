@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
@@ -30,6 +31,7 @@ import com.amap.api.navi.model.AimLessModeStat;
 import com.amap.api.navi.model.NaviInfo;
 import com.amap.api.navi.model.NaviLatLng;
 import com.amap.navi.demo.R;
+import com.amap.navi.demo.util.NaviUtil;
 import com.amap.navi.demo.util.TTSController;
 import com.autonavi.tbt.TrafficFacilityInfo;
 
@@ -44,6 +46,7 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
     private MapView mapView;
     private AMap aMap;
     private Marker myLocationMarker;
+    private TextView trafficfacility_tv,congestioninfo_tv;
 
     // 是否需要跟随定位
     private boolean isNeedFollow = true;
@@ -73,7 +76,7 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
     private void init() {
         if (aMap == null) {
             aMapNavi = AMapNavi.getInstance(this);
-            aMapNavi.startAimlessMode(AimLessMode.CAMERA_AND_SPECIALROAD_DETECTED);
+            aMapNavi.startAimlessMode(AimLessMode.CAMERA_AND_SPECIALROAD_DETECTED);//-巡航模式播报电子眼和特殊路段
 
             ttsManager = TTSController.getInstance(this);
             ttsManager.init();
@@ -86,9 +89,12 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
             myLocationMarker = aMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
                             .decodeResource(getResources(), R.drawable.car))));
+            aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
 
             setMapInteractiveListener();
         }
+        trafficfacility_tv = (TextView)findViewById(R.id.trafficfacility);
+        congestioninfo_tv = (TextView)findViewById(R.id.congestioninfo);
 
     }
 
@@ -132,7 +138,6 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
      * 取消timer任务
      */
     private void clearTimer() {
-        Log.i("MY","clearTimer");
         if (needFollowTimer != null) {
             needFollowTimer.cancel();
             needFollowTimer = null;
@@ -216,7 +221,7 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
 
     @Override
     public void onLocationChange(AMapNaviLocation location) {
-        Log.i("MY","onLocationChange");
+//        Log.i("MY","onLocationChange");
         if (location != null) {
             LatLng latLng = new LatLng(location.getCoord().getLatitude(),
                     location.getCoord().getLongitude());
@@ -292,7 +297,65 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
 
     @Override
     public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo aMapNaviTrafficFacilityInfo) {
-        Toast.makeText(this, "(trafficFacilityInfo.coor_X+trafficFacilityInfo.coor_Y+trafficFacilityInfo.distance+trafficFacilityInfo.limitSpeed):" + (aMapNaviTrafficFacilityInfo.getCoorX() + aMapNaviTrafficFacilityInfo.getCoorY() + aMapNaviTrafficFacilityInfo.getDistance() + aMapNaviTrafficFacilityInfo.getLimitSpeed()), Toast.LENGTH_LONG).show();
+        Log.i("MY","OnUpdateTrafficFacility11111--------------------");
+        String type = getbroadcasttype(aMapNaviTrafficFacilityInfo.getBroadcastType());
+        StringBuilder sb = new StringBuilder();
+        sb.append("道路设施类型 :" + type);
+        sb.append(" "+ NaviUtil.getFriendlyLength(aMapNaviTrafficFacilityInfo.getDistance()));
+        Log.i("MY",sb.toString());
+        trafficfacility_tv.setText(sb.toString());
+//        Toast.makeText(this, "(trafficFacilityInfo.coor_X+trafficFacilityInfo.coor_Y+trafficFacilityInfo.distance+trafficFacilityInfo.limitSpeed):" + (aMapNaviTrafficFacilityInfo.getCoorX() + aMapNaviTrafficFacilityInfo.getCoorY() + aMapNaviTrafficFacilityInfo.getDistance() + aMapNaviTrafficFacilityInfo.getLimitSpeed()), Toast.LENGTH_LONG).show();
+    }
+
+    private String getbroadcasttype(int broadcastType) {
+        /**
+         * 获取道路设施类型 0：未知道路设施 4：测速摄像头、测速雷达 5：违章摄像头 10:请谨慎驾驶
+         * 11:有连续拍照 12：铁路道口 13：注意落石（左侧） 14：事故易发地段 15：易滑 16：村庄
+         * 18：前方学校 19：有人看管的铁路道口 20：无人看管的铁路道口 21：两侧变窄 22：向左急弯路
+         * 23：向右急弯路 24：反向弯路 25：连续弯路 26：左侧合流标识牌 27：右侧合流标识牌
+         * 28：监控摄像头 29：专用道摄像头 31：禁止超车 36：右侧变窄 37：左侧变窄 38：窄桥
+         * 39：左右绕行 40：左侧绕行 41：右侧绕行 42：注意落石（右侧） 43：傍山险路（左侧）
+         * 44：傍山险路（右侧） 47：上陡坡 48：下陡坡 49：过水路面 50：路面不平 52：慢行
+         * 53：注意危险 58：隧道 59：渡口 92:闯红灯 93:应急车道 94:非机动车道
+         * 100：不绑定电子眼高发地 101:车道违章 102:超速违章
+         */
+        String type = "";
+        switch (broadcastType){
+            case 0:
+                type = "未知道路设施";
+                break;
+            case 4:
+                type = "测速摄像头、测速雷达";
+                break;
+            case 5:
+                type = "违章摄像头 ";
+                break;
+            case 10:
+                type = "请谨慎驾驶";
+                break;
+            case 11:
+                type = "有连续拍照";
+                break;
+            case 12:
+                type = "铁路道口";
+                break;
+            case 13:
+                type = "注意落石（左侧）";
+                break;
+            case 53:
+                type = "注意危险";
+                break;
+            case 29:
+                type = "专用道摄像头";
+                break;
+            case 94:
+                type = "非机动车道";
+                break;
+            default:
+                type = "其他道路设施："+broadcastType+"(请对应参考手册说明)";
+        }
+
+        return type;
     }
 
     @Override
@@ -325,31 +388,59 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
 
     }
 
+    //巡航模式（无路线规划）下，道路设施信息更新回调
     @Override
     public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo[] aMapNaviTrafficFacilityInfos) {
-        for (AMapNaviTrafficFacilityInfo info :
-                aMapNaviTrafficFacilityInfos) {
-            Toast.makeText(this, "(trafficFacilityInfo.coor_X+trafficFacilityInfo.coor_Y+trafficFacilityInfo.distance+trafficFacilityInfo.limitSpeed):" + (info.getCoorX() + info.getCoorY() + info.getDistance() + info.getLimitSpeed()), Toast.LENGTH_LONG).show();
-        }
+//        Log.i("MY","OnUpdateTrafficFacility--------------------");
+//        for (AMapNaviTrafficFacilityInfo info :
+//                aMapNaviTrafficFacilityInfos) {
+//            String type = getbroadcasttype(info.getBroadcastType());
+//            StringBuilder sb = new StringBuilder();
+//            sb.append("道路设施类型 :" + type);
+//            sb.append("\n 距离："+ info.getDistance());
+//            Log.i("MY",sb.toString());
+////            Toast.makeText(this, "(trafficFacilityInfo.coor_X+trafficFacilityInfo.coor_Y+trafficFacilityInfo.distance+trafficFacilityInfo.limitSpeed):" + (info.getCoorX() + info.getCoorY() + info.getDistance() + info.getLimitSpeed()), Toast.LENGTH_LONG).show();
+//        }
     }
 
+    //巡航模式（无路线规划）下，统计信息更新回调 连续5个点大于15km/h后开始回调
     @Override
     public void updateAimlessModeStatistics(AimLessModeStat aimLessModeStat) {
-        Toast.makeText(this, "看log", Toast.LENGTH_SHORT).show();
+//        Log.i("MY","updateAimlessModeStatistics--------------------");
+//        Toast.makeText(this, "看log", Toast.LENGTH_SHORT).show();
+        //巡航模式（无路线规划）下轨迹距离
         Log.d(TAG, "distance=" + aimLessModeStat.getAimlessModeDistance());
+        //巡航模式（无路线规划）下运行时间
         Log.d(TAG, "time=" + aimLessModeStat.getAimlessModeTime());
     }
 
 
+    //巡航模式（无路线规划）下，统计信息更新回调 当拥堵长度大于500米且拥堵时间大于5分钟时回调
     @Override
     public void updateAimlessModeCongestionInfo(AimLessModeCongestionInfo aimLessModeCongestionInfo) {
-        Toast.makeText(this, "看log", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"roadName=" + aimLessModeCongestionInfo.getRoadName(), Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "roadName=" + aimLessModeCongestionInfo.getRoadName());
-        Log.d(TAG, "CongestionStatus=" + aimLessModeCongestionInfo.getCongestionStatus());
-        Log.d(TAG, "eventLonLat=" + aimLessModeCongestionInfo.getEventLon() + "," + aimLessModeCongestionInfo.getEventLat());
-        Log.d(TAG, "length=" + aimLessModeCongestionInfo.getLength());
-        Log.d(TAG, "time=" + aimLessModeCongestionInfo.getTime());
+//        Toast.makeText(this, "看log", Toast.LENGTH_SHORT).show();
+        Log.i("MY","updateAimlessModeCongestionInfo--------------------");
+        int status = aimLessModeCongestionInfo.getCongestionStatus();
+        StringBuilder sb = new StringBuilder();
+        if(status != 0){
+            sb.append("拥堵道路名称:" + aimLessModeCongestionInfo.getRoadName())
+                    .append("  拥堵状态:" + getcongestionstatus(status))
+                    .append("\n拥堵区域路径长度:" + NaviUtil.getFriendlyLength(aimLessModeCongestionInfo.getLength()))
+                    .append("  预计通过时间 =" + NaviUtil.getFriendlyTime(aimLessModeCongestionInfo.getTime()));
+//                    .append("\neventLonLat=" + aimLessModeCongestionInfo.getEventLon() + "," + aimLessModeCongestionInfo.getEventLat())
+//                    .append("\n事件类型:"+ aimLessModeCongestionInfo.getEventType());
+            Log.i("MY",sb.toString());
+            congestioninfo_tv.setText(sb.toString());
+        }else {
+            congestioninfo_tv.setText("");
+        }
+
+//        Toast.makeText(this,"roadName=" + aimLessModeCongestionInfo.getRoadName(), Toast.LENGTH_SHORT).show();
+//        Log.d(TAG, "roadName=" + aimLessModeCongestionInfo.getRoadName());
+//        Log.d(TAG, "CongestionStatus=" + aimLessModeCongestionInfo.getCongestionStatus());
+//        Log.d(TAG, "eventLonLat=" + aimLessModeCongestionInfo.getEventLon() + "," + aimLessModeCongestionInfo.getEventLat());
+//        Log.d(TAG, "length=" + aimLessModeCongestionInfo.getLength());
+//        Log.d(TAG, "time=" + aimLessModeCongestionInfo.getTime());
         for (AMapCongestionLink link :
                 aimLessModeCongestionInfo.getAmapCongestionLinks()) {
             Log.d(TAG, "status=" + link.getCongestionStatus());
@@ -358,6 +449,28 @@ public class IntelligentBroadcastActivity extends Activity implements AMapNaviLi
                 Log.d(TAG, latlng.toString());
             }
         }
+    }
+    public String getcongestionstatus(int status){
+//        0未知状态，1通畅，2缓行，3 阻塞，4 严重阻塞
+        String congestionstatus = "";
+        switch (status){
+            case 1:
+                congestionstatus = "通畅";
+                break;
+            case 2:
+                congestionstatus = "缓行";
+                break;
+            case 3:
+                congestionstatus = "阻塞";
+                break;
+            case 4:
+                congestionstatus = "严重阻塞";
+                break;
+            default:
+                congestionstatus = "未知";
+        }
+        return congestionstatus;
+
     }
 
     @Override

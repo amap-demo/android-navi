@@ -2,6 +2,7 @@ package com.amap.navi.demo.navigation;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.amap.api.navi.AMapNaviView;
@@ -44,8 +45,10 @@ public class UseExtraGpsDataActivity extends BaseActivity {
 
     public void setExtraGPSData() {
 
+        Log.i("MY","setExtraGPSData");
 
-        Location location = new Location("gps仪器型号");
+
+        Location location = new Location("gps");
         location.setLongitude(116.4 - 0.01 * i);
         location.setLatitude(39.9);
         location.setSpeed(5);
@@ -54,7 +57,7 @@ public class UseExtraGpsDataActivity extends BaseActivity {
         location.setTime(System.currentTimeMillis());
 
         //以上6项数据缺一不可!!!
-        mAMapNavi.setExtraGPSData(location);
+        mAMapNavi.setExtraGPSData(1,location);
 
         Toast.makeText(this, location.toString(), Toast.LENGTH_SHORT).show();
 

@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.amap.api.maps.MapView
-    android:id="@+id/map"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</com.amap.api.maps.MapView>
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal" >
+    <LinearLayout
+        android:id="@+id/layout_info"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_left"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/trafficfacility"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/congestioninfo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_info">
+    </com.amap.api.maps.MapView>
+
+
+</RelativeLayout>
+
  

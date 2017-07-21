@@ -17,6 +17,9 @@ import com.amap.navi.demo.R;
 
 import java.util.ArrayList;
 
+/**
+ * 自定义线路UI
+ */
 
 public class CustomRouteActivity extends BaseActivity implements AMapNaviListener {
 

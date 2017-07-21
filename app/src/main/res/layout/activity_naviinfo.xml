@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="导航信息"
+                android:textSize="16sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="导航状态"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/navistate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="导航线路信息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/navipath_alllength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/navipath_alltime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/navipath_startandend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/navipath_strategy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="导航动作"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <ImageView
+                    android:id="@+id/naviinfo_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/margin_left_new"/>
+                <TextView
+                    android:id="@+id/naviinfo_retaindistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="道路信息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/naviinfo_currentroad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:text="TextView"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/naviinfo_nextroad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="目的地信息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/naviinfo_pathretaindistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/naviinfo_pathretaintime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="自车信息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/location_coord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/location_bearing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="摄像头信息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/camera_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/cross"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="路口放大图"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+                <ImageView
+                    android:id="@+id/crossimage"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/servicearea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:text="服务区信息"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/poi_title_size" />
+
+                <TextView
+                    android:id="@+id/servicearea_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_left_new"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

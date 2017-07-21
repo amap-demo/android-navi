@@ -1,10 +1,14 @@
 package com.amap.navi.demo.routecalculate;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.amap.api.navi.AMapNaviView;
 import com.amap.api.navi.AMapNaviViewOptions;
 import com.amap.api.navi.enums.NaviType;
+import com.amap.api.navi.model.AMapNaviCross;
+import com.amap.api.navi.model.NaviInfo;
 import com.amap.navi.demo.BaseActivity;
 import com.amap.navi.demo.R;
 
@@ -54,5 +58,9 @@ public class SingleRouteCalculateActivity extends BaseActivity {
     public void onCalculateRouteSuccess(int[] ids) {
         super.onCalculateRouteSuccess(ids);
         mAMapNavi.startNavi(NaviType.EMULATOR);
+    }
+    @Override
+    public void showCross(AMapNaviCross aMapNaviCross) {
+        Log.i("MY","showcross路口放大图---------------------");
     }
 }

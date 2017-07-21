@@ -249,18 +249,18 @@ public class BaseActivity extends Activity implements AMapNaviListener, AMapNavi
     @Override
     public void notifyParallelRoad(int i) {
         if (i == 0) {
-            Toast.makeText(this, "当前在主辅路过渡", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "当前在主辅路过渡", Toast.LENGTH_SHORT).show();
             Log.d("wlx", "当前在主辅路过渡");
             return;
         }
         if (i == 1) {
-            Toast.makeText(this, "当前在主路", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "当前在主路", Toast.LENGTH_SHORT).show();
 
             Log.d("wlx", "当前在主路");
             return;
         }
         if (i == 2) {
-            Toast.makeText(this, "当前在辅路", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "当前在辅路", Toast.LENGTH_SHORT).show();
 
             Log.d("wlx", "当前在辅路");
         }
