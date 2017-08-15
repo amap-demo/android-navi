@@ -45,9 +45,6 @@ public class UseExtraGpsDataActivity extends BaseActivity {
 
     public void setExtraGPSData() {
 
-        Log.i("MY","setExtraGPSData");
-
-
         Location location = new Location("gps");
         location.setLongitude(116.4 - 0.01 * i);
         location.setLatitude(39.9);
@@ -59,7 +56,7 @@ public class UseExtraGpsDataActivity extends BaseActivity {
         //以上6项数据缺一不可!!!
         mAMapNavi.setExtraGPSData(1,location);
 
-        Toast.makeText(this, location.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
 
         i++;
     }

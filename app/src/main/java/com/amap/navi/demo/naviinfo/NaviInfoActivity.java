@@ -18,6 +18,7 @@ import com.amap.api.navi.enums.NaviType;
 import com.amap.api.navi.model.AMapLaneInfo;
 import com.amap.api.navi.model.AMapNaviCameraInfo;
 import com.amap.api.navi.model.AMapNaviCross;
+import com.amap.api.navi.model.AMapNaviGuide;
 import com.amap.api.navi.model.AMapNaviInfo;
 import com.amap.api.navi.model.AMapNaviLocation;
 import com.amap.api.navi.model.AMapNaviPath;
@@ -80,6 +81,7 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
         crossimage = (ImageView) findViewById(R.id.crossimage);
         cross = (LinearLayout) findViewById(R.id.cross);
         servicearea = (LinearLayout) findViewById(R.id.servicearea);
+        imageView.setVisibility(View.GONE);
     }
 
     @Override
@@ -128,6 +130,7 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
         navipath_alltime.setText("总时长："+NaviUtil.getFriendlyTime(navipath.getAllTime()));
         navipath_startandend.setText("起终点：\n"+navipath.getStartPoint().toString() +"\n"+ navipath.getEndPoint().toString());
 //        navipath_strategy.setText("策略："+navipath.getStrategy());
+
     }
 
     @Override
@@ -286,16 +289,17 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
     @Override
     public void onNaviInfoUpdate(NaviInfo naviinfo) {
         Bitmap bitmap;
-        byte[] bytes = naviinfo.getIconData();
-        if (bytes != null) {
-            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        } else {
-            bitmap = null;
-        }
-        if (bitmap != null){
-            imageView.setImageBitmap(bitmap);
-        }
-        naviinfo_retaindistance.setText("导航动作距离："+naviinfo.getCurStepRetainDistance()+"米");
+//        byte[] bytes = naviinfo.getIconData();
+//        if (bytes != null) {
+//            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//        } else {
+//            bitmap = null;
+//        }
+//        if (bitmap != null){
+//            imageView.setImageBitmap(bitmap);
+//        }
+        naviinfo_retaindistance.setText("导航动作类型："+naviinfo.getIconType()
+        +"\n导航动作距离："+naviinfo.getCurStepRetainDistance()+"米");
         naviinfo_currentroad.setText("当前道路："+naviinfo.getCurrentRoadName());
         naviinfo_nextroad.setText("下一道路："+naviinfo.getNextRoadName());
         naviinfo_pathretaindistance.setText("剩余距离："+ NaviUtil.getFriendlyLength(naviinfo.getPathRetainDistance()));
@@ -317,7 +321,6 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
 
     @Override
     public void OnUpdateTrafficFacility(AMapNaviTrafficFacilityInfo aMapNaviTrafficFacilityInfo) {
-        //1.8.0开始，不再回调该方法
     }
 
     @Override
