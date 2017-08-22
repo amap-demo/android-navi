@@ -142,6 +142,11 @@ public class HudDisplayActivity extends Activity implements AMapHudViewListener,
     }
 
     @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
+    @Override
     public void onEndEmulatorNavi() {
 
     }

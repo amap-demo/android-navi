@@ -200,6 +200,11 @@ public class TTSController implements AMapNaviListener {
         handler.obtainMessage(CHECK_TTS_PLAY).sendToTarget();
     }
 
+    @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
 
     @Override
     public void onInitNaviFailure() {

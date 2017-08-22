@@ -154,6 +154,11 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
     }
 
     @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
+    @Override
     public void onEndEmulatorNavi() {
         //停止模拟导航回调
         navistate.setText("模拟导航结束");

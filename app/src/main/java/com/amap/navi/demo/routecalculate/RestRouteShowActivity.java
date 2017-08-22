@@ -435,6 +435,11 @@ public class RestRouteShowActivity extends Activity implements AMapNaviListener,
     }
 
     @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
+    @Override
     public void onGpsOpenStatus(boolean arg0) {
 
 

@@ -118,6 +118,11 @@ public class BaseActivity extends Activity implements AMapNaviListener, AMapNavi
     }
 
     @Override
+    public void onGetNavigationText(String s) {
+
+    }
+
+    @Override
     public void onEndEmulatorNavi() {
         //结束模拟导航
     }
