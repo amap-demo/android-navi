@@ -123,6 +123,16 @@ public class IndexActivity extends CheckPermissionsActivity implements INaviInfo
     }
 
     @Override
+    public void onReCalculateRoute(int i) {
+
+    }
+
+    @Override
+    public void onExitPage(int i) {
+
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         amapTTSController.destroy();

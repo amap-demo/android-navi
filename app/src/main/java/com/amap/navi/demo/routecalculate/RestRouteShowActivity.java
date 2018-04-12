@@ -26,6 +26,7 @@ import com.amap.api.navi.AMapNavi;
 import com.amap.api.navi.AMapNaviListener;
 import com.amap.api.navi.model.AMapCarInfo;
 import com.amap.api.navi.model.AMapLaneInfo;
+import com.amap.api.navi.model.AMapModelCross;
 import com.amap.api.navi.model.AMapNaviCameraInfo;
 import com.amap.api.navi.model.AMapNaviCross;
 import com.amap.api.navi.model.AMapNaviInfo;
@@ -399,6 +400,16 @@ public class RestRouteShowActivity extends Activity implements AMapNaviListener,
     }
 
     @Override
+    public void showModeCross(AMapModelCross aMapModelCross) {
+
+    }
+
+    @Override
+    public void hideModeCross() {
+
+    }
+
+    @Override
     public void hideLaneInfo() {
 
 
@@ -475,6 +486,11 @@ public class RestRouteShowActivity extends Activity implements AMapNaviListener,
     }
 
     @Override
+    public void updateIntervalCameraInfo(AMapNaviCameraInfo aMapNaviCameraInfo, AMapNaviCameraInfo aMapNaviCameraInfo1, int i) {
+
+    }
+
+    @Override
     public void onServiceAreaUpdate(AMapServiceAreaInfo[] amapServiceAreaInfos) {
 
     }
@@ -512,6 +528,11 @@ public class RestRouteShowActivity extends Activity implements AMapNaviListener,
     @Override
     public void showLaneInfo(AMapLaneInfo[] arg0, byte[] arg1, byte[] arg2) {
 
+
+    }
+
+    @Override
+    public void showLaneInfo(AMapLaneInfo aMapLaneInfo) {
 
     }
 

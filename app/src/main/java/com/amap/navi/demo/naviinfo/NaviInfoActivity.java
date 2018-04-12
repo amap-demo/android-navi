@@ -16,6 +16,7 @@ import com.amap.api.navi.AMapNaviListener;
 import com.amap.api.navi.AMapNaviViewListener;
 import com.amap.api.navi.enums.NaviType;
 import com.amap.api.navi.model.AMapLaneInfo;
+import com.amap.api.navi.model.AMapModelCross;
 import com.amap.api.navi.model.AMapNaviCameraInfo;
 import com.amap.api.navi.model.AMapNaviCross;
 import com.amap.api.navi.model.AMapNaviGuide;
@@ -251,6 +252,11 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
 
     }
 
+    @Override
+    public void updateIntervalCameraInfo(AMapNaviCameraInfo aMapNaviCameraInfo, AMapNaviCameraInfo aMapNaviCameraInfo1, int i) {
+
+    }
+
     private String getcameratype(int cameraType) {
         //! 电子眼类型，0 测速摄像头，1为监控摄像头，2为闯红灯拍照，3为违章拍照，4为公交专用道摄像头,5-应急车道拍照
         String cameratype = "摄像头";
@@ -346,12 +352,27 @@ public class NaviInfoActivity extends Activity implements AMapNaviListener, AMap
     }
 
     @Override
+    public void showModeCross(AMapModelCross aMapModelCross) {
+
+    }
+
+    @Override
+    public void hideModeCross() {
+
+    }
+
+    @Override
     public void showLaneInfo(AMapLaneInfo[] laneInfos, byte[] laneBackgroundInfo, byte[] laneRecommendedInfo) {
         //通知APP显示车道信息。
 
         /**
          * 回调对象说明，请参见官网API文档，http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/unzip/Android_Navi_Doc/index.html
          **/
+    }
+
+    @Override
+    public void showLaneInfo(AMapLaneInfo aMapLaneInfo) {
+
     }
 
     @Override

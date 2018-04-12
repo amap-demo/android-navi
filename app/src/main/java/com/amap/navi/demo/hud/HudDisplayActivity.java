@@ -11,6 +11,7 @@ import com.amap.api.navi.AMapNaviListener;
 import com.amap.api.navi.enums.NaviType;
 import com.amap.api.navi.enums.PathPlanningStrategy;
 import com.amap.api.navi.model.AMapLaneInfo;
+import com.amap.api.navi.model.AMapModelCross;
 import com.amap.api.navi.model.AMapNaviCameraInfo;
 import com.amap.api.navi.model.AMapNaviCross;
 import com.amap.api.navi.model.AMapNaviInfo;
@@ -192,6 +193,11 @@ public class HudDisplayActivity extends Activity implements AMapHudViewListener,
     }
 
     @Override
+    public void updateIntervalCameraInfo(AMapNaviCameraInfo aMapNaviCameraInfo, AMapNaviCameraInfo aMapNaviCameraInfo1, int i) {
+
+    }
+
+    @Override
     public void onServiceAreaUpdate(AMapServiceAreaInfo[] amapServiceAreaInfos) {
 
     }
@@ -222,7 +228,22 @@ public class HudDisplayActivity extends Activity implements AMapHudViewListener,
     }
 
     @Override
+    public void showModeCross(AMapModelCross aMapModelCross) {
+
+    }
+
+    @Override
+    public void hideModeCross() {
+
+    }
+
+    @Override
     public void showLaneInfo(AMapLaneInfo[] aMapLaneInfos, byte[] bytes, byte[] bytes1) {
+
+    }
+
+    @Override
+    public void showLaneInfo(AMapLaneInfo aMapLaneInfo) {
 
     }
 
